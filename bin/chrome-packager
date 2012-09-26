@@ -37,6 +37,7 @@ def create_new_app(name)
   generator.copy_file 'Gemfile', 'Gemfile'
   generator.copy_file 'config.ru', 'config.ru'
   generator.copy_file 'background.js', 'background.js'
+  generator.copy_file 'index.haml', 'app/views/index.haml'
   generator.instance_variable_set '@app_name', name
   generator.template 'manifest.json', 'manifest.json'
   generator.inside name do
