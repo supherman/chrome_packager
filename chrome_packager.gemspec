@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "A simple tool to create packaged chrome apps"
   s.authors     = ["Herman Moreno"]
   s.email       = 'herman.moreno@crowdint.com'
-  s.files       = ["lib/chrome_packager.rb"]
+  s.files       = `git ls-files`.split("\n")
   s.homepage    =
     'http://rubygems.org/gems/chrome_packager'
 
