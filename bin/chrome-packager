@@ -6,9 +6,22 @@ require 'haml-sprockets'
 require 'thor/group'
 require 'thor/actions'
 require 'fileutils'
+require 'haml'
 
 class Generator < Thor::Group
   include Thor::Actions
+end
+
+module Haml
+  module Helpers
+    def stylesheet_link_tag(asset)
+      "<link href='/stylesheets/#{asset}.css' media='screen' rel='stylesheet' type='text/css'>"
+    end
+
+    def javascript_include_tag(asset)
+      "<script src='/javascripts/#{asset}.js'></script>"
+    end
+  end
 end
 
 Generator.source_root File.expand_path('../lib/templates', File.dirname(__FILE__))
@@ -24,6 +37,7 @@ def pack
     environment.find_asset("#{Dir.pwd}/app/assets/javascripts/application.js").to_s
   generator.create_file 'packaged/stylesheets/application.css',
     environment.find_asset("#{Dir.pwd}/app/assets/javascripts/application.css").to_s
+  generator.create_file 'packaged/index.html', parse_index
 end
 
 def create_new_app(name)
@@ -43,6 +57,11 @@ def create_new_app(name)
   generator.inside name do
     generator.run 'bundle install'
   end
+end
+
+def parse_index
+  file = File.read "#{Dir.pwd}/app/views/index.haml"
+  Haml::Engine.new(file).render
 end
 
 case
