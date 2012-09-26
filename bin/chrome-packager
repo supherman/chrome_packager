@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'sprockets'
 require 'haml-sprockets'
+require 'sprockets-sass'
 require 'thor/group'
 require 'thor/actions'
 require 'fileutils'

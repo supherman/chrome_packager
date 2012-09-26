@@ -3,6 +3,7 @@ require 'bundler/setup'
 require 'sprockets'
 require 'chrome_packager'
 require 'haml-sprockets'
+require 'sprockets-sass'
 
 map '/assets' do
   environment = Sprockets::Environment.new

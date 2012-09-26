@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency('haml')
   s.add_dependency('sprockets')
   s.add_dependency('herman-haml-sprockets')
+  s.add_dependency('sprockets-sass')
   s.add_dependency('sass')
   s.add_dependency('coffee-script')
   s.add_dependency('thor')
