@@ -39,6 +39,7 @@ def create_new_app(name)
   generator.copy_file 'background.js', 'background.js'
   generator.instance_variable_set '@app_name', name
   generator.template 'manifest.json', 'manifest.json'
+  generator.run 'bundle install'
 end
 
 case
