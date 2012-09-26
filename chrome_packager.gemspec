@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'chrome_packager'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2012-09-23'
   s.summary     = "Create packaged chrome apps"
   s.description = "A simple tool to create packaged chrome apps"
