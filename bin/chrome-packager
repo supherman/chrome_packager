@@ -8,6 +8,7 @@ require 'thor/group'
 require 'thor/actions'
 require 'fileutils'
 require 'haml'
+require 'compass'
 
 class Generator < Thor::Group
   include Thor::Actions
@@ -30,6 +31,7 @@ Generator.source_root File.expand_path('../lib/templates', File.dirname(__FILE__
 def pack
   generator = Generator.new
   environment = Sprockets::Environment.new(Dir.pwd)
+  environment.append_path Compass::Frameworks['compass'].stylesheets_directory
   environment.append_path 'app/assets/javascripts'
   environment.append_path 'app/assets/stylesheets'
   environment.append_path 'vendor/assets/javascripts'
