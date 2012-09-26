@@ -1,0 +1,4 @@
+source "http://www.rubygems.org"
+
+gem 'chrome_packager', path: '../chrome_packager'
+

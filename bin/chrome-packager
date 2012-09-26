@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'sprockets'
+require 'haml-sprockets'
+require 'thor/group'
+require 'thor/actions'
+require 'fileutils'
+
+class Generator < Thor::Group
+  include Thor::Actions
+end
+
+Generator.source_root File.expand_path('../lib/templates', File.dirname(__FILE__))
+
+def pack
+  generator = Generator.new
+  environment = Sprockets::Environment.new(Dir.pwd)
+  environment.append_path 'app/assets/javascripts'
+  environment.append_path 'app/assets/stylesheets'
+  environment.append_path 'vendor/assets/javascripts'
+  environment.append_path 'vendor/assets/stylesheets'
+  generator.create_file 'packaged/javascripts/application.js',
+    environment.find_asset("#{Dir.pwd}/app/assets/javascripts/application.js").to_s
+  generator.create_file 'packaged/stylesheets/application.css',
+    environment.find_asset("#{Dir.pwd}/app/assets/javascripts/application.css").to_s
+end
+
+def create_new_app(name)
+  generator = Generator.new
+  FileUtils.mkdir name unless File::exist?(name)
+  generator.destination_root = name
+  generator.create_file 'app/assets/javascripts/application.js'
+  generator.create_file 'app/assets/stylesheets/application.css'
+  generator.create_file 'app/assets/javascripts/.gitkeep'
+  generator.create_file 'app/assets/stylesheets/.gitkeep'
+  generator.copy_file 'Gemfile', 'Gemfile'
+  generator.copy_file 'config.ru', 'config.ru'
+  generator.copy_file 'background.js', 'background.js'
+  generator.instance_variable_set '@app_name', name
+  generator.template 'manifest.json', 'manifest.json'
+end
+
+case
+when ARGV[0] == 'new'
+  if ARGV.size == 2 && !ARGV[1].empty?
+    create_new_app(ARGV[1])
+  else
+    puts 'Provide a valid application name'
+  end
+when ARGV[0] == 'pack' && ARGV.size == 1
+  pack
+else
+  puts "Invalid options #{ARGV[0]}"
+end
+
