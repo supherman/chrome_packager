@@ -7,8 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Herman Moreno"]
   s.email       = 'herman.moreno@crowdint.com'
   s.files       = `git ls-files`.split("\n")
-  s.homepage    =
-    'http://rubygems.org/gems/chrome_packager'
+  s.homepage    = 'https://github.com/supherman/chrome_packager'
 
   s.executables = ['chrome-packager']
 
