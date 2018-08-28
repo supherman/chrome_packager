@@ -68,7 +68,7 @@ After this just follow [this instructions](http://developer.chrome.com/trunk/app
 
 ## TODO
 - Compile the index.haml view to html
-- Integrate [Jasmine](http://pivotal.github.com/jasmine/)
+- Integrate [Jasmine](https://jasmine.github.io/)
 - Every config is fixed now, add way to config the app will be good	
 	
 ## Contributing
